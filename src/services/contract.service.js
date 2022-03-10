@@ -1,0 +1,30 @@
+import { ethers } from 'ethers';
+import Election from '../artifacts/contracts/Greeter.sol/Greeter.json';
+import { metamaskService } from './metamask.service';
+
+class ContractService {
+    async initContract(){
+        const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
+        await metamaskService.isMetamask(contractAddress);
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        this.signer = provider.getSigner();
+        this.contract = new ethers.Contract(contractAddress, Election.abi, this.signer);
+    }
+
+    isBlockchainAddress(address) {
+        if(!address.startsWith('0x') || address.length !== 42){
+            throw new Error('Pleave give a correct address to add new administrator');
+        }
+    }
+
+    getGreeting(){
+        return this.contract.greet();
+    }
+
+    async setGreeting(newGreeting){
+        const setgreeting = await this.contract.setGreeting(newGreeting);
+        return setgreeting.wait();
+    }
+}
+
+export let contractService = new ContractService();
