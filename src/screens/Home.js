@@ -1,16 +1,15 @@
-import React from 'react';
-import { useEffect } from "react";
+import React, { useEffect } from 'react';
 import { useStateIfMounted } from "use-state-if-mounted";
 import FormGreeting from "../components/FormGreeting";
-import { contractService } from '../services/contract.service';
+import { greetingService } from "../services/greeting.service";
 
 export default function Home() {
 
     const [greeting, setGreeting] = useStateIfMounted('');
 
-    async function init(){
-        await contractService.initContract();
-        setGreeting(await contractService.getGreeting());
+    async function init() {
+        await greetingService.initContract();
+        setGreeting(await greetingService.getGreeting());
     }
 
     useEffect(() => {
