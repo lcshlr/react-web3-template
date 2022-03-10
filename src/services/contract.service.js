@@ -1,5 +1,5 @@
 import { ethers } from 'ethers';
-import Election from '../artifacts/contracts/Greeter.sol/Greeter.json';
+import Greeter from '../artifacts/contracts/Greeter.sol/Greeter.json';
 import { metamaskService } from './metamask.service';
 
 export default class ContractService {
@@ -8,7 +8,7 @@ export default class ContractService {
         await metamaskService.isMetamask(contractAddress);
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         this.signer = provider.getSigner();
-        this.contract = new ethers.Contract(contractAddress, Election.abi, this.signer);
+        this.contract = new ethers.Contract(contractAddress, Greeter.abi, this.signer);
     }
 
     isBlockchainAddress(address) {
