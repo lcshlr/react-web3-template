@@ -16,7 +16,7 @@ Icons from [simpleicons](https://simpleicons.org/)
 
 # About the project
 
-Idea of this project is to build a simple voting system web3 dapp with solidity contracts and implement a react UI to interact with theses contracts.
+Describe the project here.
 
 A github pipeline run solidity linter and run contracts tests after each git push.
 
